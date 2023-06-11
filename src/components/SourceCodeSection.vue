@@ -1,29 +1,33 @@
 <template>
   <div>
     <h2 class="text-xl font-semibold mb-4">Source Codes</h2>
-    <div v-for="(sourceCode, index) in sourceCodes" :key="index" class="mb-4">
-      <div class="bg-gray-100 p-4 rounded-lg">
-        <input
-          v-model="sourceCode.title"
-          class="w-full mb-2 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-          type="text"
-          placeholder="Source code title"
-        />
-        <prism-editor
-          class="my-editor"
-          v-model="sourceCode.content"
-          :highlight="highlighter"
-          line-numbers
-        ></prism-editor>
-        <button
-          @click="removeSourceCode(index)"
-          class="mt-2 bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
-        >
-          Remove this f*king code
-        </button>
+    <div v-if="sourceCodes.length > 0">
+      <div v-for="(sourceCode, index) in sourceCodes" :key="index" class="mb-4">
+        <div class="bg-gray-100 p-4 rounded-lg">
+          <input
+            v-model="sourceCode.title"
+            class="w-full mb-2 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            type="text"
+            placeholder="Source code title"
+          />
+          <prism-editor
+            class="my-editor"
+            v-model="sourceCode.content"
+            :highlight="highlighter"
+            line-numbers
+          ></prism-editor>
+          <button
+            @click="removeSourceCode(index)"
+            class="mt-2 bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+          >
+            Remove this f*king code
+          </button>
+        </div>
       </div>
     </div>
-
+    <div v-else>
+      <p class="text-md text-gray-700 mb-4">No source code added yet.</p>
+    </div>
     <button
       @click="addSourceCode"
       class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"

@@ -1,5 +1,11 @@
 <template>
   <div class="mt-8">
+    <button
+      @click="generateFinalPrompt"
+      class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 mr-2 rounded w-full mb-4"
+    >
+      Generate Prompt
+    </button>
     <h2 class="text-xl font-bold mb-4">Final Prompt</h2>
     <div class="bg-gray-100 p-4 mt-4 rounded-md">
       <p class="text-md">
@@ -11,24 +17,32 @@
       </p>
     </div>
     <div class="mt-4">
-      <button
-        @click="copySystemPromptToClipboard"
-        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 mr-2 rounded"
+      <div
+        v-if="finalPrompt !== null && finalPrompt !== ''"
+        class="flex flex-row justify-center"
       >
-        {{ buttonText.systemPrompt }}
-      </button>
-      <button
-        @click="copyPromptToClipboard"
-        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 mr-2 rounded"
-      >
-        {{ buttonText.prompt }}
-      </button>
-      <button
-        @click="copyChatGPTPromptToClipboard"
-        class="bg-emerald-600 hover:bg-emerald-900 text-white font-bold py-2 px-4 rounded"
-      >
-        {{ buttonText.chatgpt }}
-      </button>
+        <button
+          @click="copySystemPromptToClipboard"
+          :disabled="systemPrompt === null || systemPrompt === ''"
+          class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 mr-2 rounded flex-auto"
+        >
+          {{ buttonText.systemPrompt }}
+        </button>
+        <button
+          @click="copyPromptToClipboard"
+          :disabled="finalPrompt === null || finalPrompt === ''"
+          class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 mr-2 rounded flex-auto"
+        >
+          {{ buttonText.prompt }}
+        </button>
+        <button
+          @click="copyChatGPTPromptToClipboard"
+          :disabled="chatgptPrompt === null || chatgptPrompt === ''"
+          class="bg-emerald-600 hover:bg-emerald-900 text-white font-bold py-2 px-4 rounded flex-auto"
+        >
+          {{ buttonText.chatgpt }}
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -65,28 +79,8 @@ export default {
         case "Kotlin":
           return "You are Senior Kotlin Developer. You are highly adept in SpringBoot, with extensive experience in building robust, scalable, and efficient applications. Your expertise includes in-depth knowledge of Kotlin syntax, object-oriented programming, functional programming, and multi-platform development. You excel in designing microservices architecture, implementing RESTful APIs, and leveraging Spring ecosystem tools for seamless integration and performance optimization.";
         default:
-          return "You are ChatGPT, a large language model trained by OpenAI. Follow the user's instructions carefully. Respond using markdown.";
+          return "";
       }
-    },
-  },
-  watch: {
-    sourceCodes: {
-      handler() {
-        this.generateFinalPrompt();
-      },
-      deep: true,
-    },
-    tasks: {
-      handler() {
-        this.generateFinalPrompt();
-      },
-      deep: true,
-    },
-    selectedSpecialist: {
-      handler() {
-        this.generateFinalPrompt();
-      },
-      deep: true,
     },
   },
   methods: {
