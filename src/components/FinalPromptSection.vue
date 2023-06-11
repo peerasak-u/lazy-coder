@@ -6,7 +6,6 @@
     >
       Generate Prompt
     </button>
-    <h2 class="text-xl font-bold mb-4">Final Prompt</h2>
     <div class="bg-gray-100 p-4 mt-4 rounded-md">
       <p class="text-md">
         Tokens: <span class="font-bold text-gray-700">{{ usedTokens }}</span>

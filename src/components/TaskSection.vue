@@ -54,7 +54,6 @@ export default {
   methods: {
     addTask() {
       this.tasks.push("");
-
       this.$nextTick(() => {
         const inputs = document.querySelectorAll("input");
         inputs[inputs.length - 1].focus();
