@@ -10,18 +10,20 @@
             type="text"
             placeholder="Source code title"
           />
-          <prism-editor
-            class="my-editor"
-            v-model="sourceCode.content"
-            :highlight="highlighter"
-            line-numbers
-          ></prism-editor>
-          <button
-            @click="removeSourceCode(index)"
-            class="mt-2 bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
-          >
-            Remove this f*king code
-          </button>
+          <div class="editor-container">
+            <prism-editor
+              class="my-editor"
+              v-model="sourceCode.content"
+              :highlight="highlighter"
+              line-numbers
+            ></prism-editor>
+            <button
+              @click="removeSourceCode(index)"
+              class="mt-2 bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Remove
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -86,6 +88,12 @@ export default {
 </script>
 
 <style scoped>
+.editor-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
 /* required class */
 .my-editor {
   /* we dont use `language-` classes anymore so thats why we need to add background and text color manually */
@@ -100,6 +108,7 @@ export default {
 
   /* max height is 80% of screen hiehgt */
   max-height: 80vh;
+  min-height: 10vh;
 
   /* scrollable in x and y direction */
   overflow: auto;
