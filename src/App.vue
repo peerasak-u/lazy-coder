@@ -74,6 +74,6 @@ export default {
 
 <style scoped>
 .card-container {
-  max-height: 65vh;
+  max-height: 90vh;
 }
 </style>
