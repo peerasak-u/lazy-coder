@@ -6,43 +6,75 @@
     >
       Generate Prompt ✨
     </button>
-    <div class="bg-gray-700 p-4 mt-4 rounded-md">
-      <p class="text-md">
-        Tokens: <span class="text-gray-300">{{ usedTokens }}</span>
-      </p>
-      <p class="text-md">
-        Price:
-        <span class="text-gray-300">${{ usedUSD.toFixed(6) }}</span>
-      </p>
-    </div>
-    <div class="mt-4">
+    <!-- Add the modal card here -->
+    <transition name="fade" appear>
       <div
-        v-if="finalPrompt !== null && finalPrompt !== ''"
-        class="flex flex-row justify-center"
+        v-if="modalVisible"
+        class="fixed inset-0 flex items-center justify-center z-50"
+        :style="modalBackgroundStyle"
       >
-        <button
-          @click="copySystemPromptToClipboard"
-          :disabled="systemPrompt === null || systemPrompt === ''"
-          class="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 mr-2 rounded flex-auto"
-        >
-          {{ buttonText.systemPrompt }}
-        </button>
-        <button
-          @click="copyPromptToClipboard"
-          :disabled="finalPrompt === null || finalPrompt === ''"
-          class="bg-sky-500 hover:bg-sky-600 text-white py-2 px-4 mr-2 rounded flex-auto"
-        >
-          {{ buttonText.prompt }}
-        </button>
-        <button
-          @click="copyChatGPTPromptToClipboard"
-          :disabled="chatgptPrompt === null || chatgptPrompt === ''"
-          class="bg-emerald-600 hover:bg-emerald-900 text-white py-2 px-4 rounded flex-auto"
-        >
-          {{ buttonText.chatgpt }}
-        </button>
+        <div class="bg-gray-700 p-6 rounded-md shadow-lg w-full max-w-lg">
+          <h2 class="text-xl font-bold mb-4">Generated Prompts</h2>
+          <label for="systemPrompt" class="block text-sm font-medium mb-2"
+            >System Prompt:</label
+          >
+          <textarea
+            id="systemPrompt"
+            class="w-full bg-gray-900 text-gray-400 h-24 p-2 mb-4 border border-gray-600 rounded"
+            readonly
+            >{{ systemPrompt }}</textarea
+          >
+          <label for="prompt" class="block text-sm font-medium mb-2"
+            >Prompt:</label
+          >
+          <textarea
+            id="prompt"
+            class="w-full bg-gray-900 text-gray-400 h-24 p-2 mb-4 border border-gray-600 rounded"
+            readonly
+            >{{ finalPrompt }}</textarea
+          >
+          <div class="bg-gray-700 p-4 mt-4 rounded-md">
+            <p class="text-md">
+              Tokens: <span class="text-gray-300">{{ usedTokens }}</span>
+            </p>
+            <p class="text-md">
+              Price:
+              <span class="text-gray-300">${{ usedUSD.toFixed(6) }}</span>
+            </p>
+          </div>
+          <div class="flex flex-row justify-center">
+            <button
+              @click="copySystemPromptToClipboard"
+              :disabled="systemPrompt === null || systemPrompt === ''"
+              class="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 mr-2 rounded flex-auto"
+            >
+              {{ buttonText.systemPrompt }}
+            </button>
+            <button
+              @click="copyPromptToClipboard"
+              :disabled="finalPrompt === null || finalPrompt === ''"
+              class="bg-sky-500 hover:bg-sky-600 text-white py-2 px-4 mr-2 rounded flex-auto"
+            >
+              {{ buttonText.prompt }}
+            </button>
+            <button
+              @click="copyChatGPTPromptToClipboard"
+              :disabled="chatgptPrompt === null || chatgptPrompt === ''"
+              class="bg-emerald-600 hover:bg-emerald-900 text-white py-2 px-4 rounded flex-auto"
+            >
+              {{ buttonText.chatgpt }}
+            </button>
+          </div>
+          <div @click="showModal" class="flex flex-row mt-4">
+            <button
+              class="bg-red-800 hover:bg-red-900 text-white py-2 px-4 rounded flex-auto"
+            >
+              Close
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -59,12 +91,17 @@ export default {
     return {
       finalPrompt: "",
       chatgptPrompt: "",
+
       usedTokens: 0,
       usedUSD: 0,
       buttonText: {
         systemPrompt: "System Prompt",
         prompt: "Prompt",
         chatgpt: "ChatGPT",
+      },
+      modalVisible: false,
+      modalBackgroundStyle: {
+        backgroundColor: "rgba(31, 41, 55, 0.9)",
       },
     };
   },
@@ -100,6 +137,7 @@ export default {
       this.finalPrompt = `Consider this following source codes inside quadruple ${mainDelimeterName}:\n\n${mainDelimeter}\n${sourceCodes}\n${mainDelimeter}\n\n\n${command}\n${task}`;
       this.chatgptPrompt = `Ignore all previous instructions. ${this.systemPrompt}\n\n\n${this.finalPrompt}`;
       this.calculateTokens();
+      this.modalVisible = true;
     },
     calculateTokens() {
       const usageInfo = new GPTTokens({
@@ -118,6 +156,9 @@ export default {
 
       this.usedTokens = usageInfo.usedTokens;
       this.usedUSD = usageInfo.usedUSD;
+    },
+    showModal() {
+      this.modalVisible = !this.modalVisible;
     },
     async copySystemPromptToClipboard() {
       try {
@@ -152,3 +193,15 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
