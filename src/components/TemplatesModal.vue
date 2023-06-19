@@ -49,7 +49,25 @@ export default {
       templates: JSON.parse(localStorage.getItem("templates")) || [],
     };
   },
+  beforeMount() {
+    window.addEventListener("storage", this.updateTemplatesFromLocalStorage);
+  },
+  beforeDestroy() {
+    window.removeEventListener("storage", this.updateTemplatesFromLocalStorage);
+  },
+  watch: {
+    modalVisible(visible) {
+      if (visible) {
+        this.templates = JSON.parse(localStorage.getItem("templates")) || [];
+      }
+    },
+  },
   methods: {
+    updateTemplatesFromLocalStorage(event) {
+      if (event.key === "templates") {
+        this.templates = JSON.parse(event.newValue) || [];
+      }
+    },
     showModal() {
       this.modalVisible = true;
     },
