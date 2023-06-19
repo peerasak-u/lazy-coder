@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="text-xl font-semibold mb-4">Tasks</h2>
+    <h2 class="text-xl font-semibold mb-4">Requirements</h2>
     <div v-if="tasks.length > 0" class="bg-gray-700 p-4 rounded-lg mb-4">
       <div
         v-for="(task, index) in tasks"
@@ -32,16 +32,29 @@
           </button>
         </div>
       </div>
+      <button
+        @click="addTask"
+        class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+      >
+        Add
+      </button>
     </div>
     <div v-else>
-      <p class="text-md text-gray-700 mb-4">No tasks added yet.</p>
+      <p class="text-md text-gray-300 text-center mb-2">
+        No requirements have been added yet.
+      </p>
+      <p class="text-md text-gray-300 text-center mb-4">
+        To specify what you would like to improve or fix in the given source
+        code, simply click the
+        <button
+          @click="addTask"
+          class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          Add
+        </button>
+        button.
+      </p>
     </div>
-    <button
-      @click="addTask"
-      class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
-    >
-      Add Task
-    </button>
   </div>
 </template>
 
