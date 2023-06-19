@@ -10,7 +10,8 @@
         <div class="flex flex-wrap h-full">
           <!-- Left Side Container -->
           <div
-            class="w-full sm:w-3/5 card-container custom-scrollbar overflow-y-scroll px-4"
+            :class="leftSideContainerClass"
+            class="card-container custom-scrollbar overflow-y-scroll px-4"
           >
             <!-- Source Code Section -->
             <source-code-section v-model="sourceCodes"></source-code-section>
@@ -18,6 +19,7 @@
 
           <!-- Right Side Container -->
           <div
+            v-show="sourceCodes.length > 0"
             class="w-full sm:w-2/5 card-container custom-scrollbar overflow-y-scroll px-4"
           >
             <!-- Task Section -->
@@ -61,6 +63,11 @@ export default {
       tasks: [],
       selectedSpecialist: "",
     };
+  },
+  computed: {
+    leftSideContainerClass() {
+      return this.sourceCodes.length > 0 ? "w-full sm:w-3/5" : "w-full";
+    },
   },
 };
 </script>
