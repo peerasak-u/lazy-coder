@@ -19,7 +19,7 @@
 
           <!-- Right Side Container -->
           <div
-            v-show="sourceCodes.length > 0"
+            v-show="isRightSideContainerVisible"
             class="w-full sm:w-2/5 card-container custom-scrollbar overflow-y-scroll px-4"
           >
             <!-- Task Section -->
@@ -65,8 +65,15 @@ export default {
     };
   },
   computed: {
+    isRightSideContainerVisible() {
+      return this.sourceCodes.some(
+        (code) => code.title !== "" && code.content !== ""
+      );
+    },
     leftSideContainerClass() {
-      return this.sourceCodes.length > 0 ? "w-full sm:w-3/5" : "w-full";
+      return this.sourceCodes.length > 0 && this.isRightSideContainerVisible
+        ? "w-full sm:w-3/5"
+        : "w-full";
     },
   },
 };
