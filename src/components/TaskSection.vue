@@ -44,9 +44,9 @@
         Simply click on the
         <button
           @click="addTask"
-          class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          class="bg-blue-600 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
         >
-          Add
+          Add 📝
         </button>
         button to specify what you would like to improve or fix in the given
         source code

@@ -38,9 +38,9 @@
         <p class="mt-4">
           To get started, click on the <button
       @click="addSourceCode"
-      class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded"
+      class="bg-blue-600 hover:bg-blue-700 text-white py-1 px-2 rounded"
     >
-      Add
+      Add 📝
     </button>
         button to upload the source code you want to fix or improve.
         </p>  
