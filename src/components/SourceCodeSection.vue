@@ -34,8 +34,7 @@
     </button>
     </div>
     <div v-else>
-      <p class="w-full text-md text-gray-300 text-center mb-4">
-        <p>No source code has been added yet. </p> 
+      <p class="w-full text-md text-gray-300 text-center mb-4"> 
         <p class="mt-4">
           To get started, click on the <button
       @click="addSourceCode"

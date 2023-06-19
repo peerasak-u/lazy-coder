@@ -40,19 +40,16 @@
       </button>
     </div>
     <div v-else>
-      <p class="text-md text-gray-300 text-center mb-2">
-        No requirements have been added yet.
-      </p>
       <p class="text-md text-gray-300 text-center mb-4">
-        To specify what you would like to improve or fix in the given source
-        code, simply click the
+        Simply click on the
         <button
           @click="addTask"
           class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           Add
         </button>
-        button.
+        button to specify what you would like to improve or fix in the given
+        source code
       </p>
     </div>
   </div>
