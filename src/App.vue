@@ -4,7 +4,34 @@
   >
     <div class="relative py-3 sm:w-5/6 mx-auto w-full">
       <div class="bg-gray-800 shadow-xl sm:rounded-3xl px-4 py-10">
-        <h1 class="text-4xl ml-4 lazy-font mb-6">Lazy Coder ..zzZZ</h1>
+        <div class="flex items-center justify-between mx-4 mb-6">
+          <div class="flex items-center">
+            <img src="./assets/logo.svg" class="h-16" />
+            <h1 class="text-4xl font-bold lazy-font">Lazy Coder</h1>
+          </div>
+          <div class="flex flex-row gap-2">
+            <button
+              @click="loadTemplate"
+              class="bg-gray-700 text-white text-sm px-2 py-2 rounded cursor-move"
+            >
+              📦 Template
+            </button>
+            <templates-modal
+              ref="templatesModal"
+              @template-selected="onTemplateSelected"
+            ></templates-modal>
+            <button
+              @click="showSaveTemplateModal"
+              class="bg-gray-700 text-white text-sm px-2 py-2 rounded cursor-move"
+            >
+              💾 Save
+            </button>
+            <save-template-modal
+              ref="saveTemplateModal"
+              @save-template="saveTemplate"
+            ></save-template-modal>
+          </div>
+        </div>
 
         <!-- Main Container -->
         <div class="flex flex-col h-full">
@@ -47,6 +74,8 @@ import SourceCodeSection from "./components/SourceCodeSection.vue";
 import TaskSection from "./components/TaskSection.vue";
 import SpecialistSection from "./components/SpecialistSection.vue";
 import FinalPromptSection from "./components/FinalPromptSection.vue";
+import SaveTemplateModal from "./components/SaveTemplateModal.vue";
+import TemplatesModal from "./components/TemplatesModal.vue";
 
 export default {
   components: {
@@ -54,6 +83,8 @@ export default {
     TaskSection,
     SpecialistSection,
     FinalPromptSection,
+    SaveTemplateModal,
+    TemplatesModal,
   },
   data() {
     return {
@@ -77,6 +108,32 @@ export default {
       return (
         this.sourceCodesValid && this.tasks.every((task) => task.trim() !== "")
       );
+    },
+  },
+  methods: {
+    loadTemplate() {
+      this.$refs.templatesModal.showModal();
+    },
+    onTemplateSelected(template) {
+      this.sourceCodes = template.sourceCodes;
+      this.tasks = template.tasks;
+      this.selectedSpecialist = template.selectedSpecialist;
+    },
+    showSaveTemplateModal() {
+      this.$refs.saveTemplateModal.showModal();
+    },
+    saveTemplate(title, description) {
+      const template = {
+        title: title,
+        description: description,
+        sourceCodes: this.sourceCodes,
+        tasks: this.tasks,
+        selectedSpecialist: this.selectedSpecialist,
+      };
+
+      const templates = JSON.parse(localStorage.getItem("templates")) || [];
+      templates.push(template);
+      localStorage.setItem("templates", JSON.stringify(templates));
     },
   },
 };
