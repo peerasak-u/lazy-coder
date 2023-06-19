@@ -5,3 +5,8 @@
 .lazy-font {
   font-family: "Caveat", cursive;
 }
+
+html,
+body {
+  background-color: #111827;
+}
