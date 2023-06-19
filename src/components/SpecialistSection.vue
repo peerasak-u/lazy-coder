@@ -1,6 +1,6 @@
 <template>
-  <div class="my-4">
-    <h2 class="text-xl font-semibold mb-2">Select Programmer</h2>
+  <div class="bg-gray-700 p-4 rounded-lg mb-4">
+    <h2 class="text-xl font-semibold mb-2">3. Select Programmer</h2>
     <div>
       <label for="specialist" class="sr-only">Select a specialist</label>
       <p class="text-gray-300 text-sm mb-2">

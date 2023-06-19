@@ -1,9 +1,9 @@
 <template>
-  <div class="flex flex-col justify-center">
-    <h2 class="text-xl font-semibold mb-4">Source Codes</h2>
+  <div class="flex flex-col justify-center bg-gray-700 p-4 rounded-lg">
     <div class="flex flex-col justify-center" v-if="sourceCodes.length > 0">
+      <h2 class="text-xl font-semibold mb-4">1. Source Codes</h2>
       <div v-for="(sourceCode, index) in sourceCodes" :key="index" class="mb-4">
-        <div class="bg-gray-700 p-4 rounded-lg">
+        <div class="p-4 bg-gray-500 rounded-lg shadow-md">
           <input
             v-model="sourceCode.title"
             class="w-full mb-2 px-3 py-2 text-sm leading-tight bg-gray-600 text-gray-300 border border-gray-600 rounded shadow appearance-none focus:outline-none focus:shadow-outline"

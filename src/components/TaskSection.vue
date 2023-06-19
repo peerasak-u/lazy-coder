@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h2 class="text-xl font-semibold mb-4">Requirements</h2>
     <div v-if="tasks.length > 0" class="bg-gray-700 p-4 rounded-lg mb-4">
+      <h2 class="text-xl font-semibold mb-4">2. Requirements</h2>
       <div
         v-for="(task, index) in tasks"
         :key="index"
@@ -40,7 +40,7 @@
       </button>
     </div>
     <div v-else>
-      <p class="text-md text-gray-300 text-center mb-4">
+      <p class="text-md text-gray-300 text-center mt-4 mb-4">
         Simply click on the
         <button
           @click="addTask"
