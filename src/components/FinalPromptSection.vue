@@ -1,10 +1,10 @@
 <template>
-  <div class="mt-8">
+  <div>
     <button
       @click="generateFinalPrompt"
       class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 mr-2 rounded w-full mb-4"
     >
-      Generate Prompt
+      Generate Prompt ✨
     </button>
     <div class="bg-gray-700 p-4 mt-4 rounded-md">
       <p class="text-md">

@@ -36,7 +36,7 @@
         @click="addTask"
         class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
       >
-        Add
+        Add more requirement
       </button>
     </div>
     <div v-else>

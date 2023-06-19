@@ -9,7 +9,7 @@
         <!-- Main Container -->
         <div class="flex flex-col h-full">
           <!-- Source Code Section -->
-          <div class="custom-scrollbar overflow-y-scroll px-4">
+          <div class="px-4">
             <source-code-section
               v-model="sourceCodes"
               class="mb-4"
@@ -17,29 +17,19 @@
           </div>
 
           <!-- Task Section -->
-          <div
-            v-if="sourceCodes.length && sourceCodesValid"
-            class="card-container custom-scrollbar overflow-y-scroll px-4"
-          >
+          <div v-if="sourceCodes.length && sourceCodesValid" class="px-4">
             <task-section v-model="tasks" class="mb-4"></task-section>
           </div>
 
           <!-- Specialist Section -->
-          <div
-            v-if="tasks.length && tasksValid"
-            class="card-container custom-scrollbar overflow-y-scroll px-4"
-          >
+          <div v-if="tasks.length && tasksValid" class="px-4">
             <specialist-section
               v-model="selectedSpecialist"
-              class="mb-4"
             ></specialist-section>
           </div>
 
           <!-- Final Prompt Section -->
-          <div
-            v-if="selectedSpecialist"
-            class="card-container custom-scrollbar overflow-y-scroll px-4"
-          >
+          <div v-if="specialistValid" class="px-4">
             <final-prompt-section
               :sourceCodes="sourceCodes"
               :tasks="tasks"
@@ -73,11 +63,20 @@ export default {
     };
   },
   computed: {
+    specialistValid() {
+      return (
+        this.tasksValid &&
+        this.sourceCodesValid &&
+        this.selectedSpecialist.trim() !== ""
+      );
+    },
     sourceCodesValid() {
       return this.sourceCodes.every((code) => code.title && code.content);
     },
     tasksValid() {
-      return this.tasks.every((task) => task.trim() !== "");
+      return (
+        this.sourceCodesValid && this.tasks.every((task) => task.trim() !== "")
+      );
     },
   },
 };
