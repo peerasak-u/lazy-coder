@@ -13,7 +13,7 @@
         class="fixed inset-0 flex items-center justify-center z-50"
         :style="modalBackgroundStyle"
       >
-        <div class="bg-gray-700 p-6 rounded-md shadow-lg w-full max-w-lg">
+        <div class="bg-gray-800 p-6 rounded-md shadow-lg w-full max-w-lg">
           <h2 class="text-xl font-bold mb-4">Generated Prompts</h2>
           <label for="systemPrompt" class="block text-sm font-medium mb-2"
             >System Prompt:</label
@@ -33,7 +33,7 @@
             readonly
             >{{ finalPrompt }}</textarea
           >
-          <div class="bg-gray-700 p-4 mt-4 rounded-md">
+          <div class="bg-gray-700 p-4 mb-2 rounded-md">
             <p class="text-md">
               Tokens: <span class="text-gray-300">{{ usedTokens }}</span>
             </p>
@@ -101,7 +101,7 @@ export default {
       },
       modalVisible: false,
       modalBackgroundStyle: {
-        backgroundColor: "rgba(31, 41, 55, 0.9)",
+        backgroundColor: "rgba(0, 0, 0, 0.8)",
       },
     };
   },
