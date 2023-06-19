@@ -2,9 +2,21 @@
   <div>
     <h2 class="text-xl font-semibold mb-4">Tasks</h2>
     <div v-if="tasks.length > 0" class="bg-gray-100 p-4 rounded-lg mb-4">
-      <div v-for="(task, index) in tasks" :key="index">
+      <div
+        v-for="(task, index) in tasks"
+        :key="index"
+        draggable="true"
+        @dragstart="dragStart(index, $event)"
+        @dragover="dragOver(index, $event)"
+        @drop="drop(index, $event)"
+        class="drag-item"
+      >
         <div class="flex items-center">
-          <!-- when user press enter should be call function "addTask"  -->
+          <button
+            class="bg-gray-500 text-white px-2 py-1 rounded mr-2 mb-2 cursor-move"
+          >
+            ↕
+          </button>
           <input
             v-model="tasks[index]"
             type="text"
@@ -61,6 +73,20 @@ export default {
     },
     removeTask(index) {
       this.tasks.splice(index, 1);
+    },
+    dragStart(index, event) {
+      event.dataTransfer.effectAllowed = "move";
+      event.dataTransfer.setData("text/plain", index);
+    },
+    dragOver(index, event) {
+      event.preventDefault();
+      event.dataTransfer.dropEffect = "move";
+    },
+    drop(index, event) {
+      event.preventDefault();
+      const fromIndex = event.dataTransfer.getData("text/plain");
+      const task = this.tasks.splice(fromIndex, 1)[0];
+      this.tasks.splice(index, 0, task);
     },
   },
 };
