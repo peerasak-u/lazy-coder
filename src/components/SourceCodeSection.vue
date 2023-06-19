@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="flex flex-col justify-center">
     <h2 class="text-xl font-semibold mb-4">Source Codes</h2>
-    <div v-if="sourceCodes.length > 0">
+    <div class="flex flex-col justify-center" v-if="sourceCodes.length > 0">
       <div v-for="(sourceCode, index) in sourceCodes" :key="index" class="mb-4">
         <div class="bg-gray-700 p-4 rounded-lg">
           <input
@@ -26,16 +26,28 @@
           </div>
         </div>
       </div>
+      <button
+      @click="addSourceCode"
+      class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded"
+    >
+      Add
+    </button>
     </div>
     <div v-else>
-      <p class="text-md text-gray-300 mb-4">No source code added yet.</p>
-    </div>
-    <button
+      <p class="w-full text-md text-gray-300 text-center mb-4">
+        <p>No source code has been added yet. </p> 
+        <p class="mt-4">
+          To get started, click on the <button
       @click="addSourceCode"
-      class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+      class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded"
     >
-      Add Source Code
+      Add
     </button>
+        button to upload the source code you want to fix or improve.
+        </p>  
+      </p>
+    </div>
+    
   </div>
 </template>
 
