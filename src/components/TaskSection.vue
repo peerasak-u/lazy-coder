@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 class="text-xl font-semibold mb-4">Tasks</h2>
-    <div v-if="tasks.length > 0" class="bg-gray-100 p-4 rounded-lg mb-4">
+    <div v-if="tasks.length > 0" class="bg-gray-700 p-4 rounded-lg mb-4">
       <div
         v-for="(task, index) in tasks"
         :key="index"
@@ -20,13 +20,13 @@
           <input
             v-model="tasks[index]"
             type="text"
-            class="w-full mb-2 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            class="w-full mb-2 px-3 py-2 text-sm leading-tight bg-gray-600 text-gray-300 border border-gray-600 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
             placeholder="Enter a task"
             @keyup.enter="addTask"
           />
           <button
             @click="removeTask(index)"
-            class="bg-red-500 text-white px-2 py-1 rounded ml-2 mb-2"
+            class="bg-red-700 hover:bg-red-800 text-white px-2 py-1 rounded ml-2 mb-2"
           >
             Remove
           </button>
@@ -38,7 +38,7 @@
     </div>
     <button
       @click="addTask"
-      class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+      class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
     >
       Add Task
     </button>

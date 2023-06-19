@@ -7,7 +7,7 @@
         id="specialist"
         v-model="selectedSpecialist"
         @change="$emit('update:modelValue', selectedSpecialist)"
-        class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-md font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+        class="w-full mb-2 px-3 py-2 text-sm leading-tight bg-gray-600 text-gray-300 border border-gray-600 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
       >
         <option value="" disabled>Choose your master</option>
         <option value="Swift">Swift</option>

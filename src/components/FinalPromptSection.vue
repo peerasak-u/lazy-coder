@@ -2,17 +2,17 @@
   <div class="mt-8">
     <button
       @click="generateFinalPrompt"
-      class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 mr-2 rounded w-full mb-4"
+      class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 mr-2 rounded w-full mb-4"
     >
       Generate Prompt
     </button>
-    <div class="bg-gray-100 p-4 mt-4 rounded-md">
+    <div class="bg-gray-700 p-4 mt-4 rounded-md">
       <p class="text-md">
-        Tokens: <span class="font-bold text-gray-700">{{ usedTokens }}</span>
+        Tokens: <span class="text-gray-300">{{ usedTokens }}</span>
       </p>
       <p class="text-md">
-        Price USD:
-        <span class="font-bold text-gray-700">{{ usedUSD.toFixed(6) }}</span>
+        Price:
+        <span class="text-gray-300">${{ usedUSD.toFixed(6) }}</span>
       </p>
     </div>
     <div class="mt-4">
@@ -23,21 +23,21 @@
         <button
           @click="copySystemPromptToClipboard"
           :disabled="systemPrompt === null || systemPrompt === ''"
-          class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 mr-2 rounded flex-auto"
+          class="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 mr-2 rounded flex-auto"
         >
           {{ buttonText.systemPrompt }}
         </button>
         <button
           @click="copyPromptToClipboard"
           :disabled="finalPrompt === null || finalPrompt === ''"
-          class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 mr-2 rounded flex-auto"
+          class="bg-sky-500 hover:bg-sky-600 text-white py-2 px-4 mr-2 rounded flex-auto"
         >
           {{ buttonText.prompt }}
         </button>
         <button
           @click="copyChatGPTPromptToClipboard"
           :disabled="chatgptPrompt === null || chatgptPrompt === ''"
-          class="bg-emerald-600 hover:bg-emerald-900 text-white font-bold py-2 px-4 rounded flex-auto"
+          class="bg-emerald-600 hover:bg-emerald-900 text-white py-2 px-4 rounded flex-auto"
         >
           {{ buttonText.chatgpt }}
         </button>
@@ -144,10 +144,10 @@ export default {
       }
     },
     async showCopySuccess(buttonType) {
+      const oldText = this.buttonText[buttonType];
       this.buttonText[buttonType] = "Prompt Copied";
       await new Promise((resolve) => setTimeout(resolve, 2000));
-      this.buttonText[buttonType] =
-        buttonType === "systemPrompt" ? "System Prompt" : "Prompt";
+      this.buttonText[buttonType] = oldText;
     },
   },
 };
