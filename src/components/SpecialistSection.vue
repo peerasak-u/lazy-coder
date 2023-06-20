@@ -10,7 +10,7 @@
         id="specialist"
         v-model="selectedSpecialist"
         @change="$emit('update:modelValue', selectedSpecialist)"
-        class="w-full mb-2 px-3 py-2 text-sm leading-tight bg-gray-600 text-gray-300 border border-gray-600 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+        class="w-full mb-2 px-3 py-2 text-sm leading-tight code-title text-gray-300 border border-gray-600 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
       >
         <option value="" disabled>Programming Language</option>
         <option value="Swift">Swift</option>

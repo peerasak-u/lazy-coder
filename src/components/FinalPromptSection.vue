@@ -2,7 +2,7 @@
   <div>
     <button
       @click="generateFinalPrompt"
-      class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 mr-2 rounded w-full mb-4"
+      class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 mr-2 rounded w-full"
     >
       Generate Prompt ✨
     </button>

@@ -3,23 +3,23 @@
     <div class="flex flex-col justify-center" v-if="sourceCodes.length > 0">
       <h2 class="text-xl font-semibold mb-4">1. Source Codes</h2>
       <div v-for="(sourceCode, index) in sourceCodes" :key="index" class="mb-4">
-        <div class="p-4 bg-gray-500 rounded-lg shadow-md">
+        <div class="p-4 border border-gray-600 rounded-lg shadow-lg">
           <input
             v-model="sourceCode.title"
-            class="w-full mb-2 px-3 py-2 text-sm leading-tight bg-gray-600 text-gray-300 border border-gray-600 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            class="w-full mb-2 px-3 py-2 text-sm leading-tight code-title text-gray-300 border border-gray-600 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
             type="text"
             placeholder="Source code title"
           />
           <div class="editor-container">
             <prism-editor
-              class="my-editor"
+              class="my-editor border border-gray-600"
               v-model="sourceCode.content"
               :highlight="highlighter"
               line-numbers
             ></prism-editor>
             <button
               @click="removeSourceCode(index)"
-              class="mt-2 bg-red-700 hover:bg-red-800 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              class="mt-2 bg-red-700 hover:bg-red-800 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
             >
               Remove
             </button>

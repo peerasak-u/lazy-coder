@@ -20,7 +20,7 @@
           <input
             v-model="tasks[index]"
             type="text"
-            class="w-full mb-2 px-3 py-2 text-sm leading-tight bg-gray-600 text-gray-300 border border-gray-600 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            class="w-full mb-2 px-3 py-2 text-sm leading-tight code-title text-gray-300 border border-gray-600 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
             placeholder="Enter a task"
             @keyup.enter="addTask"
           />

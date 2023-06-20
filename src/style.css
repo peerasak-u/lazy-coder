@@ -6,6 +6,10 @@
   font-family: "Caveat", cursive;
 }
 
+.code-title {
+  background: #2d2d2d;
+}
+
 html,
 body {
   background-color: #111827;
