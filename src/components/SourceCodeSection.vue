@@ -12,7 +12,7 @@
           v-model="sourceCode.title"
           class="tab-title"
           type="text"
-          placeholder="Untitled 📝"
+          placeholder="Please enter a title 📝"
         />
         <button @click.stop="removeSourceCode(index)" class="tab-close">
           &times;
