@@ -18,7 +18,7 @@
           </button>
           <templates-modal
             ref="templatesModal"
-            @template-selected="$emit('template-selected', $event)"
+            @template-selected="onTemplateSelected"
           ></templates-modal>
           <button
             @click="showSaveTemplateModal"
