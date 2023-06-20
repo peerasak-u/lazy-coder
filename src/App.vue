@@ -3,38 +3,12 @@
     class="min-h-screen bg-gray-900 text-white py-6 flex flex-col justify-center sm:py-12"
   >
     <!-- Navbar -->
-    <nav class="fixed top-0 left-0 w-full bg-gray-800 shadow-xl z-10">
-      <div
-        class="container mx-auto px-4 py-3 flex items-center justify-between"
-      >
-        <div class="flex items-center">
-          <img src="./assets/logo.svg" class="h-16" />
-          <h1 class="text-4xl font-bold lazy-font">Lazy Coder</h1>
-        </div>
-        <div class="flex flex-row gap-2">
-          <button
-            @click="loadTemplate"
-            class="bg-gray-700 text-white text-sm px-2 py-2 rounded cursor-move"
-          >
-            📦 Template
-          </button>
-          <templates-modal
-            ref="templatesModal"
-            @template-selected="onTemplateSelected"
-          ></templates-modal>
-          <button
-            @click="showSaveTemplateModal"
-            class="bg-gray-700 text-white text-sm px-2 py-2 rounded cursor-move"
-          >
-            💾 Save
-          </button>
-          <save-template-modal
-            ref="saveTemplateModal"
-            @save-template="saveTemplate"
-          ></save-template-modal>
-        </div>
-      </div>
-    </nav>
+    <Navbar
+      @load-template="loadTemplate"
+      @template-selected="onTemplateSelected"
+      @show-save-template-modal="showSaveTemplateModal"
+      @save-template="saveTemplate"
+    />
     <!-- End Navbar -->
 
     <div class="relative py-3 sm:w-5/6 mx-auto w-full mt-20">
@@ -76,6 +50,7 @@
 </template>
 
 <script>
+import Navbar from "./components/Navbar.vue";
 import SourceCodeSection from "./components/SourceCodeSection.vue";
 import TaskSection from "./components/TaskSection.vue";
 import SpecialistSection from "./components/SpecialistSection.vue";
@@ -85,6 +60,7 @@ import TemplatesModal from "./components/TemplatesModal.vue";
 
 export default {
   components: {
+    Navbar,
     SourceCodeSection,
     TaskSection,
     SpecialistSection,

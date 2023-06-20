@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col justify-center bg-gray-700 p-4 rounded-lg">
-    <div class="flex flex-col justify-center" v-if="sourceCodes.length > 0">
+  <div class="flex flex-col justify-center ">
+    <div class="flex flex-col justify-center bg-gray-700 p-4 rounded-lg" v-if="sourceCodes.length > 0">
       <h2 class="text-xl font-semibold mb-4">1. Source Codes</h2>
       <div v-for="(sourceCode, index) in sourceCodes" :key="index" class="mb-4">
         <div class="p-4 border border-gray-600 rounded-lg shadow-lg">
@@ -34,7 +34,7 @@
     </button>
     </div>
     <div v-else>
-      <p class="w-full text-md text-gray-300 text-center mb-4"> 
+      <p class="w-full text-md text-gray-300 text-center"> 
         <p class="mt-4">
           To get started, click on the <button
       @click="addSourceCode"
@@ -42,7 +42,7 @@
     >
       Add 📝
     </button>
-        button to upload the source code you want to fix or improve.
+        button to add the source code you want to fix or improve.
         </p>  
       </p>
     </div>
