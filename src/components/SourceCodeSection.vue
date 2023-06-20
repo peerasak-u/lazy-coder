@@ -1,24 +1,24 @@
 <template>
   <h2 class="text-xl font-semibold mb-2">1. Code</h2>
-  <div class="source-code-section mb-4">
-    <div class="tabs" v-if="sourceCodes.length > 0">
+  <div class="flex flex-col mb-4">
+    <div class="flex items-center bg-gray-900 p-1 rounded-t-lg" v-if="sourceCodes.length > 0">
       <div
         v-for="(sourceCode, index) in sourceCodes"
         :key="index"
-        :class="['tab', { 'tab-active': activeTab === index }]"
+        :class="['flex items-center px-2 py-1 bg-gray-900 text-gray-600 mr-1 rounded-lg cursor-pointer', { 'bg-gray-600': activeTab === index }]"
         @click="activeTab = index"
       >
         <input
           v-model="sourceCode.title"
-          class="tab-title"
+          class="bg-transparent border-none text-gray-300 text-sm outline-none"
           type="text"
           placeholder="Please enter a title 📝"
         />
-        <button @click.stop="removeSourceCode(index)" class="tab-close">
+        <button @click.stop="removeSourceCode(index)" class="bg-transparent border-none text-gray-400 text-sm cursor-pointer ml-1">
           &times;
         </button>
       </div>
-      <button @click="addSourceCode" class="add-tab-btn">
+      <button @click="addSourceCode" class="bg-transparent border-none text-gray-400 text-lg cursor-pointer px-1">
         +
       </button>
     </div>
@@ -71,13 +71,13 @@ export default {
   data() {
     return {
       sourceCodes: this.modelValue,
-      activeTab: 0, // Add this new data property
+      activeTab: 0,
     };
   },
   methods: {
     addSourceCode() {
       this.sourceCodes.push({ title: "", content: "" });
-      this.activeTab = this.sourceCodes.length - 1; // Set the active tab to the newly added tab
+      this.activeTab = this.sourceCodes.length - 1;
     },
     removeSourceCode(index) {
       this.sourceCodes.splice(index, 1);
@@ -107,90 +107,19 @@ export default {
 </script>
 
 <style scoped>
-.source-code-section {
-  display: flex;
-  flex-direction: column;
-}
-
-.tabs {
-  display: flex;
-  align-items: center;
-  background-color: #111827;
-  padding: 4px;
-  border-radius: 5px 5px 0 0;
-}
-
-.tab {
-  display: flex;
-  align-items: center;
-  padding: 4px 8px;
-  background-color: #111827;
-  color: #ccc;
-  margin-right: 4px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.tab-active {
-  background-color: #1a243b;
-}
-
-.tab-title {
-  background: transparent;
-  border: none;
-  color: #ccc;
-  font-size: 14px;
-  outline: none;
-}
-
-.tab-close {
-  background: transparent;
-  border: none;
-  color: #ccc;
-  font-size: 14px;
-  cursor: pointer;
-  margin-left: 4px;
-}
-
-.add-tab-btn {
-  background: transparent;
-  border: none;
-  color: #ccc;
-  font-size: 20px;
-  cursor: pointer;
-  padding: 0 4px;
-}
-.editor-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-/* required class */
 .my-editor {
-  /* we dont use `language-` classes anymore so thats why we need to add background and text color manually */
   background: #111827;
   color: #ccc;
-
-  /* you must provide font-family font-size line-height. Example: */
   font-family: Fira code, Fira Mono, Consolas, Menlo, Courier, monospace;
   font-size: 14px;
   line-height: 1.5;
   padding: 5px;
-
-  /* max height is 80% of screen hiehgt */
   max-height: 80vh;
   min-height: 10vh;
-
-  /* scrollable in x and y direction */
   overflow: auto;
-
-  /* add rounded corner */
-  /* rounded only bottom left and right */
   border-radius: 0 0 5px 5px;
 }
 
-/* optional class for removing the outline */
 .prism-editor__textarea:focus {
   outline: none;
 }
