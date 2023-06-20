@@ -5,7 +5,7 @@
       <div
         v-for="(sourceCode, index) in sourceCodes"
         :key="index"
-        :class="['flex items-center px-2 py-1 bg-gray-900 text-gray-600 mr-1 rounded-lg cursor-pointer', { 'bg-gray-600': activeTab === index }]"
+        :class="['flex items-center px-2 py-2 bg-gray-900 text-gray-600 mr-1 rounded-md cursor-pointer', { 'bg-slate-800': activeTab === index }]"
         @click="activeTab = index"
       >
         <input
