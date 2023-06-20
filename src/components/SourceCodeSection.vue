@@ -127,7 +127,7 @@ export default {
   background-color: #111827;
   color: #ccc;
   margin-right: 4px;
-  border-radius: 3px 3px 0 0;
+  border-radius: 5px;
   cursor: pointer;
 }
 
