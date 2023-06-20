@@ -6,7 +6,7 @@
     <nav class="fixed top-0 left-0 w-full bg-gray-800 shadow-xl z-10">
       <div class="w-full px-10 py-3 flex items-center justify-between">
         <div class="flex items-center">
-          <img src="../assets/logo.svg" class="h-16" />
+          <img :src="imageUrl" class="h-16" />
           <h1 class="text-4xl font-bold lazy-font">Lazy Coder</h1>
         </div>
         <div class="flex flex-row gap-2">
@@ -80,6 +80,7 @@ import SpecialistSection from "./components/SpecialistSection.vue";
 import FinalPromptSection from "./components/FinalPromptSection.vue";
 import SaveTemplateModal from "./components/SaveTemplateModal.vue";
 import TemplatesModal from "./components/TemplatesModal.vue";
+import imageUrl from "./assets/logo.svg";
 
 export default {
   components: {
@@ -95,6 +96,7 @@ export default {
       sourceCodes: [],
       tasks: [],
       selectedSpecialist: "",
+      imageUrl,
     };
   },
   computed: {
