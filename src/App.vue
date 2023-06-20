@@ -28,7 +28,7 @@
           </button>
           <save-template-modal
             ref="saveTemplateModal"
-            @save-template="$emit('save-template', $event)"
+            @save-template="saveTemplate"
           ></save-template-modal>
         </div>
       </div>
