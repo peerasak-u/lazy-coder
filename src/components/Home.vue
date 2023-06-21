@@ -37,36 +37,29 @@
 
     <div class="relative py-3 sm:w-5/6 mx-auto w-full mt-20">
       <div class="bg-gray-800 shadow-xl sm:rounded-3xl px-4 py-10">
-        <!-- Main Container -->
-        <div class="flex flex-col h-full">
-          <!-- Source Code Section -->
-          <div class="px-4">
-            <source-code-section
-              v-model="sourceCodes"
-              class="mb-4"
-            ></source-code-section>
-          </div>
+        <div class="flex flex-col h-full px-4">
+          <source-code-section
+            v-model="sourceCodes"
+            class="mb-4"
+          ></source-code-section>
 
-          <!-- Task Section -->
-          <div v-if="sourceCodes.length && sourceCodesValid" class="px-4">
-            <task-section v-model="tasks" class="mb-4"></task-section>
-          </div>
+          <task-section
+            v-if="isEnableTaskSection"
+            v-model="tasks"
+            class="mb-4"
+          ></task-section>
 
-          <!-- Specialist Section -->
-          <div v-if="tasks.length && tasksValid" class="px-4">
-            <specialist-section
-              v-model="selectedSpecialist"
-            ></specialist-section>
-          </div>
+          <specialist-section
+            v-if="isEnableSpecialistSection"
+            v-model="selectedSpecialist"
+          ></specialist-section>
 
-          <!-- Final Prompt Section -->
-          <div v-if="specialistValid" class="px-4">
-            <final-prompt-section
-              :sourceCodes="sourceCodes"
-              :tasks="tasks"
-              :selectedSpecialist="selectedSpecialist"
-            ></final-prompt-section>
-          </div>
+          <final-prompt-section
+            v-if="isEnableFinalPromptSection"
+            :sourceCodes="sourceCodes"
+            :tasks="tasks"
+            :selectedSpecialist="selectedSpecialist"
+          ></final-prompt-section>
         </div>
       </div>
     </div>
@@ -100,20 +93,16 @@ export default {
     };
   },
   computed: {
-    specialistValid() {
-      return (
-        this.tasksValid &&
-        this.sourceCodesValid &&
-        this.selectedSpecialist.trim() !== ""
-      );
+    isEnableTaskSection() {
+      return this.sourceCodes.length > 0 || this.tasks.length > 0;
     },
-    sourceCodesValid() {
-      return this.sourceCodes.every((code) => code.title && code.content);
+    isEnableSpecialistSection() {
+      return this.tasks.length > 0;
     },
-    tasksValid() {
-      return (
-        this.sourceCodesValid && this.tasks.every((task) => task.trim() !== "")
-      );
+    isEnableFinalPromptSection() {
+      if (!this.isEnableTaskSection) return false;
+      if (!this.isEnableSpecialistSection) return false;
+      return this.selectedSpecialist.trim() !== "";
     },
   },
   methods: {
