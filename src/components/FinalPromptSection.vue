@@ -1,12 +1,12 @@
 <template>
   <div>
+    <!-- Generate Prompt -->
     <button
       @click="generateFinalPrompt"
       class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 mr-2 rounded w-full"
     >
       Generate Prompt ✨
     </button>
-    <!-- Prompt Modal -->
     <PromptModal
       :modalVisible="modalVisible"
       :modalBackgroundStyle="modalBackgroundStyle"
@@ -21,12 +21,26 @@
       @copy-prompt="copyPromptToClipboard"
       @copy-chatgpt-prompt="copyChatGPTPromptToClipboard"
     />
-    <!-- End Prompt Modal -->
+    <!-- End Generate Prompt -->
+    <button
+      @click="getAnswer"
+      class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 mr-2 mt-4 rounded w-full"
+    >
+      Get Answer ✨
+    </button>
+    <AnswerModal
+      :modalVisible="answerModalVisible"
+      :modalBackgroundStyle="modalBackgroundStyle"
+      :systemPrompt="systemPrompt"
+      :prompt="finalPrompt"
+      @toggle-modal="showAnswerModal"
+    />
   </div>
 </template>
 
 <script>
 import PromptModal from "./PromptModal.vue";
+import AnswerModal from "./AnswerModal.vue";
 import { GPTTokens } from "gpt-tokens";
 
 export default {
@@ -37,6 +51,7 @@ export default {
   },
   components: {
     PromptModal,
+    AnswerModal,
   },
   data() {
     return {
@@ -51,6 +66,7 @@ export default {
         chatgpt: "ChatGPT",
       },
       modalVisible: false,
+      answerModalVisible: false,
       modalBackgroundStyle: {
         backgroundColor: "rgba(0, 0, 0, 0.8)",
       },
@@ -72,6 +88,14 @@ export default {
   },
   methods: {
     generateFinalPrompt() {
+      this.updatePrompt();
+      this.modalVisible = true;
+    },
+    getAnswer() {
+      this.updatePrompt();
+      this.answerModalVisible = true;
+    },
+    updatePrompt() {
       const mainDelimeter = "####";
       const mainDelimeterName = "hashtag";
       const codeDelimiter = "```";
@@ -84,11 +108,12 @@ export default {
 
       const command = "Form the source code above, do the following tasks:";
       const task = this.tasks.map((task) => `- ${task}`).join("\n");
+      const note =
+        'Note: every code block should define language type. e.g. ```swift\nprint("Hello World")\n``` if it vue should be use "javascript"\n\n\n';
 
-      this.finalPrompt = `Consider this following source codes inside quadruple ${mainDelimeterName}:\n\n${mainDelimeter}\n${sourceCodes}\n${mainDelimeter}\n\n\n${command}\n${task}`;
+      this.finalPrompt = `Consider this following source codes inside quadruple ${mainDelimeterName}:\n\n${mainDelimeter}\n${sourceCodes}\n${mainDelimeter}\n\n\n${command}\n${task}\n\n\n${note}`;
       this.chatgptPrompt = `Ignore all previous instructions. ${this.systemPrompt}\n\n\n${this.finalPrompt}`;
       this.calculateTokens();
-      this.modalVisible = true;
     },
     calculateTokens() {
       const usageInfo = new GPTTokens({
@@ -110,6 +135,9 @@ export default {
     },
     showModal() {
       this.modalVisible = !this.modalVisible;
+    },
+    showAnswerModal() {
+      this.answerModalVisible = !this.answerModalVisible;
     },
     async copySystemPromptToClipboard() {
       try {
