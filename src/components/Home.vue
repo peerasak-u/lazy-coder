@@ -35,7 +35,20 @@
     </nav>
     <!-- End Navbar -->
 
-    <div class="relative py-3 sm:w-5/6 mx-auto w-full mt-20">
+    <div
+      class="sm:w-5/6 mx-auto w-full bg-yellow-300 p-4 text-black rounded-xl mt-20"
+    >
+      <div class="text-yellow-950 font-bold mb-2">
+        📣 Attention Lazy Coders!
+      </div>
+      <div class="text-yellow-950">
+        Your precious source code is safe with us. We're too lazy to even think
+        about storing or connecting it to any database. All the magic happens
+        client-side, so code away worry-free! 🛌💤
+      </div>
+    </div>
+
+    <div class="relative py-3 sm:w-5/6 mx-auto w-full mt-4">
       <div class="bg-gray-800 shadow-xl sm:rounded-3xl px-4 py-10">
         <div class="flex flex-col h-full px-4">
           <source-code-section
