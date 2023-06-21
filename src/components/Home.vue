@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen bg-gray-900 text-white py-6 flex flex-col justify-center sm:py-12"
+    class="bg-gray-900 text-white py-6 flex flex-col justify-center sm:py-12"
   >
     <!-- Navbar -->
     <nav class="fixed top-0 left-0 w-full bg-gray-800 shadow-xl z-10">
