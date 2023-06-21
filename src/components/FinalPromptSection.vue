@@ -85,6 +85,9 @@ export default {
           return "";
       }
     },
+    showGetAnswerButton() {
+      return localStorage.getItem("api_token") !== null;
+    },
   },
   methods: {
     generateFinalPrompt() {

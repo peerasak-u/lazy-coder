@@ -30,6 +30,16 @@
             ref="saveTemplateModal"
             @save-template="saveTemplate"
           ></save-template-modal>
+          <button
+            @click="showSettingsModal"
+            class="bg-gray-700 text-white text-sm px-2 py-2 rounded"
+          >
+            ⚙️ Settings
+          </button>
+          <settings-modal
+            ref="settingsModal"
+            @save-settings="saveSettings"
+          ></settings-modal>
         </div>
       </div>
     </nav>
@@ -86,6 +96,7 @@ import SpecialistSection from "./SpecialistSection.vue";
 import FinalPromptSection from "./FinalPromptSection.vue";
 import SaveTemplateModal from "./SaveTemplateModal.vue";
 import TemplatesModal from "./TemplatesModal.vue";
+import SettingsModal from "./SettingsModal.vue";
 import imageUrl from "../assets/logo.svg";
 
 export default {
@@ -96,6 +107,7 @@ export default {
     FinalPromptSection,
     SaveTemplateModal,
     TemplatesModal,
+    SettingsModal,
   },
   data() {
     return {
@@ -130,18 +142,11 @@ export default {
     showSaveTemplateModal() {
       this.$refs.saveTemplateModal.showModal();
     },
-    saveTemplate(title, description) {
-      const template = {
-        title: title,
-        description: description,
-        sourceCodes: this.sourceCodes,
-        tasks: this.tasks,
-        selectedSpecialist: this.selectedSpecialist,
-      };
-
-      const templates = JSON.parse(localStorage.getItem("templates")) || [];
-      templates.push(template);
-      localStorage.setItem("templates", JSON.stringify(templates));
+    showSettingsModal() {
+      this.$refs.settingsModal.showModal();
+    },
+    saveSettings(apiToken) {
+      localStorage.setItem("api_token", apiToken);
     },
   },
 };
