@@ -23,6 +23,7 @@
     />
     <!-- End Generate Prompt -->
     <button
+      v-if="showGetAnswerButton"
       @click="getAnswer"
       class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 mr-2 mt-4 rounded w-full"
     >
