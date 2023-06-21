@@ -1,6 +1,6 @@
 <template>
   <div v-if="modalVisible" class="flex items-center justify-center z-50">
-    <div class="p-6 rounded-md w-full">
+    <div class="mt-4 w-full">
       <h2 class="text-xl font-bold mb-4">Answer</h2>
 
       <div class="w-full text-slate-300">
