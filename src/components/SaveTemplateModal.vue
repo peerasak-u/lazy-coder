@@ -24,16 +24,16 @@
         ></textarea>
         <div class="flex flex-row mt-4">
           <button
-            @click="confirm"
-            class="bg-green-800 hover:bg-green-900 text-white py-2 px-4 rounded flex-auto mr-2"
-          >
-            Confirm
-          </button>
-          <button
             @click="cancel"
-            class="bg-red-800 hover:bg-red-900 text-white py-2 px-4 rounded flex-auto ml-2"
+            class="bg-red-800 hover:bg-red-900 text-white py-2 px-4 rounded flex-auto mr-2"
           >
             Cancel
+          </button>
+          <button
+            @click="confirm"
+            class="bg-green-800 hover:bg-green-900 text-white py-2 px-4 rounded flex-auto ml-2"
+          >
+            Confirm
           </button>
         </div>
       </div>

@@ -7,6 +7,7 @@
     >
       <div class="bg-gray-800 p-6 rounded-md shadow-lg w-full max-w-lg">
         <h2 class="text-xl font-bold mb-4">Load Template</h2>
+
         <ul class="mb-4">
           <li
             v-for="(template, index) in templates"
