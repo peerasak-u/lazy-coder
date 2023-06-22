@@ -113,7 +113,7 @@ export default {
       const command = "Form the source code above, do the following tasks:";
       const task = this.tasks.map((task) => `- ${task}`).join("\n");
       const note =
-        'Note: every code block should define language type. e.g. ```swift\nprint("Hello World")\n``` if it vue should be use "javascript"\n\n\n';
+        'Note: don\'t forget to write a code block with the specified language name at the beginning every block, e.g. for Swift:\n ```swift\nprint("Hello World")```';
 
       this.finalPrompt = `Consider this following source codes inside quadruple ${mainDelimeterName}:\n\n${mainDelimeter}\n${sourceCodes}\n${mainDelimeter}\n\n\n${command}\n${task}\n\n\n${note}`;
       this.chatgptPrompt = `Ignore all previous instructions. ${this.systemPrompt}\n\n\n${this.finalPrompt}`;

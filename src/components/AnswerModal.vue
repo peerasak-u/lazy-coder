@@ -4,7 +4,7 @@
       <h2 class="text-xl font-bold mb-4">Answer</h2>
 
       <div class="w-full text-slate-300">
-        <div v-html="streamedTextHtml"></div>
+        <div class="streamed-text" v-html="streamedTextHtml"></div>
       </div>
 
       <div class="flex flex-row mt-4">
@@ -15,21 +15,46 @@
         >
           Stop Streaming
         </button>
+        <button
+          v-else
+          @click="regenerateStream"
+          class="bg-blue-800 hover:bg-blue-900 text-white py-2 px-4 rounded flex-auto mr-2"
+        >
+          Regenerate
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import MarkdownIt from "markdown-it";
-import MarkdownItPrism from "markdown-it-prism";
+import { marked } from "marked";
+import { markedHighlight } from "marked-highlight";
+import prism from "prismjs";
+
+import "prismjs/plugins/line-numbers/prism-line-numbers.js";
+import "prismjs/plugins/line-numbers/prism-line-numbers.css";
+import "prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.js";
+import "prismjs/plugins/show-language/prism-show-language.js";
 import "prismjs/themes/prism-tomorrow.css";
 
-const md = new MarkdownIt({
-  html: true,
-  linkify: true,
-  typographer: true,
-}).use(MarkdownItPrism);
+marked.use({
+  async: false,
+  pedantic: false,
+  gfm: true,
+  mangle: false,
+  headerIds: false,
+});
+
+marked.use(
+  markedHighlight({
+    langPrefix: "language-",
+    highlight(code, lang) {
+      const actualLang = prism.languages[lang] ? lang : "clike";
+      return prism.highlight(code, prism.languages[actualLang], actualLang);
+    },
+  })
+);
 
 export default {
   props: {
@@ -46,7 +71,7 @@ export default {
   },
   computed: {
     streamedTextHtml() {
-      return md.render(this.streamedText);
+      return marked.parse(this.streamedText);
     },
   },
   watch: {
@@ -63,6 +88,7 @@ export default {
       this.$emit("toggle-modal");
     },
     async startStreaming() {
+      this.streamedText = "";
       const apiToken = localStorage.getItem("api_token");
       const model = localStorage.getItem("model");
       const response = await fetch(
@@ -137,6 +163,10 @@ export default {
         this.stream = null;
       }
     },
+    regenerateStream() {
+      this.stopStreaming();
+      this.startStreaming();
+    },
   },
 };
 </script>
@@ -150,5 +180,19 @@ export default {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+.copy-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px 10px;
+  background-color: #f5f5f5;
+  border: none;
+  cursor: pointer;
+}
+
+.code-block {
+  position: relative;
 }
 </style>

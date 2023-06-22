@@ -148,6 +148,17 @@ export default {
     saveSettings(apiToken) {
       localStorage.setItem("api_token", apiToken);
     },
+    saveTemplate(title, description) {
+      const templates = JSON.parse(localStorage.getItem("templates")) || [];
+      templates.push({
+        title,
+        description,
+        sourceCodes: this.sourceCodes,
+        tasks: this.tasks,
+        selectedSpecialist: this.selectedSpecialist,
+      });
+      localStorage.setItem("templates", JSON.stringify(templates));
+    },
   },
 };
 </script>
