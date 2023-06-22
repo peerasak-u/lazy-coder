@@ -11,8 +11,17 @@
           >OpenAI API Key:</label
         >
         <input
-          id="title"
+          id="api-token"
           v-model="apiToken"
+          class="w-full bg-gray-900 text-gray-400 p-2 mb-4 border border-gray-600 rounded"
+        />
+
+        <label for="title" class="block text-sm font-medium mb-2"
+          >Chat Completion Model:</label
+        >
+        <input
+          id="chat-model"
+          v-model="model"
           class="w-full bg-gray-900 text-gray-400 p-2 mb-4 border border-gray-600 rounded"
         />
 
@@ -44,18 +53,21 @@ export default {
         background: "rgba(0, 0, 0, 0.5)",
       },
       apiToken: "",
+      model: "",
     };
   },
   methods: {
     showModal() {
       this.apiToken = localStorage.getItem("api_token") || "";
+      this.model = localStorage.getItem("model") || "";
       this.modalVisible = true;
     },
     hideModal() {
       this.modalVisible = false;
     },
     confirm() {
-      this.$emit("save-settings", this.apiToken);
+      localStorage.setItem("api_token", this.apiToken);
+      localStorage.setItem("model", this.model);
       this.hideModal();
     },
     cancel() {

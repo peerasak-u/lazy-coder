@@ -64,6 +64,7 @@ export default {
     },
     async startStreaming() {
       const apiToken = localStorage.getItem("api_token");
+      const model = localStorage.getItem("model");
       const response = await fetch(
         "https://api.openai.com/v1/chat/completions",
         {
@@ -73,7 +74,7 @@ export default {
             Authorization: `Bearer ${apiToken}`,
           },
           body: JSON.stringify({
-            model: "gpt-3.5-turbo",
+            model: model,
             messages: [
               { role: "system", content: this.systemPrompt },
               { role: "user", content: this.prompt },
