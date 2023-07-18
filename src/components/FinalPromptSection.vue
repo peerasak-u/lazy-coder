@@ -113,7 +113,7 @@ export default {
       const command = "Form the source code above, do the following tasks:";
       const task = this.tasks.map((task) => `- ${task}`).join("\n");
       const note =
-        'Note: don\'t forget to write a code block with the specified language name at the beginning every block, e.g. for Swift:\n ```swift\nprint("Hello World")```';
+        'Note: don\'t forget to write a code block with the specified language name at the beginning every block, e.g. for Swift:\n ```swift\nprint("Hello World")\n```';
 
       this.finalPrompt = `Consider this following source codes inside quadruple ${mainDelimeterName}:\n\n${mainDelimeter}\n${sourceCodes}\n${mainDelimeter}\n\n\n${command}\n${task}\n\n\n${note}`;
       this.chatgptPrompt = `Ignore all previous instructions. ${this.systemPrompt}\n\n\n${this.finalPrompt}`;
