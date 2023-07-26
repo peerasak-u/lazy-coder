@@ -16,6 +16,7 @@
         <option value="Swift">Swift</option>
         <option value="JavaScript">JavaScript</option>
         <option value="Kotlin">Kotlin</option>
+        <option value="Python">Python</option>
       </select>
     </div>
   </div>
