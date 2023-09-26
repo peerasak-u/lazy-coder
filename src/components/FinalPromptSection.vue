@@ -164,6 +164,7 @@ export default {
     async copyChatGPTPromptToClipboard() {
       try {
         await navigator.clipboard.writeText(this.chatgptPrompt);
+        window.open("https://chat.openai.com/", "_blank");
         this.showCopySuccess("chatgpt");
       } catch (err) {
         console.error("Failed to copy text: ", err);
