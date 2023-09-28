@@ -13,23 +13,29 @@
         class="w-full mb-2 px-3 py-2 text-sm leading-tight code-title text-gray-300 border border-gray-600 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
       >
         <option value="" disabled>Programming Language</option>
-        <option value="Swift">Swift</option>
-        <option value="JavaScript">JavaScript</option>
-        <option value="Kotlin">Kotlin</option>
-        <option value="Python">Python</option>
+        <option
+          v-for="specialist in specialists"
+          :value="specialist"
+          :key="specialist"
+        >
+          {{ specialist }}
+        </option>
       </select>
     </div>
   </div>
 </template>
 
 <script>
+import { specialists } from "./SystemPrompt";
+
 export default {
   props: {
     modelValue: String,
   },
   data() {
     return {
-      selectedSpecialist: this.modelValue,
+      selectedSpecialist: "",
+      specialists: Object.keys(specialists),
     };
   },
   watch: {
