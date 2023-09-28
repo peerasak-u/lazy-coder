@@ -30,7 +30,7 @@
             ref="saveTemplateModal"
             @save-template="saveTemplate"
           ></save-template-modal>
-          <button
+          <!-- <button
             @click="showSettingsModal"
             class="bg-gray-700 text-white text-sm px-2 py-2 rounded"
           >
@@ -39,7 +39,7 @@
           <settings-modal
             ref="settingsModal"
             @save-settings="saveSettings"
-          ></settings-modal>
+          ></settings-modal> -->
         </div>
       </div>
     </nav>
