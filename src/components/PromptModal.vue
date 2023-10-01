@@ -95,6 +95,16 @@ export default {
       this.$emit("copy-chatgpt-prompt");
     },
   },
+  mounted() {
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && this.modalVisible) {
+        this.showModal();
+      }
+    });
+  },
+  beforeUnmount() {
+    window.removeEventListener("keydown", this.showModal);
+  },
 };
 </script>
 
