@@ -72,9 +72,31 @@ export default {
       activeTab: 0,
     };
   },
+  mounted() {
+    navigator.clipboard.readText()
+      .then((clipboardText) => {
+        console.log(clipboardText);
+        const pattern = /ARE YOU LAZY\?\nFILENAME:\s+"([^"]*)"\nSOURCECODE:\s\n([\s\S]+)/;
+        const matches = clipboardText.match(pattern);
+        console.log(matches);
+        if (matches && matches.length === 3) {
+          const fileName = matches[1];
+          const sourceCode = matches[2];
+          this.addClipboardSourceCode(fileName, sourceCode);
+        }
+      })
+      .catch((error) => {
+        console.error('Failed to read clipboard text:', error);
+      });
+  },
   methods: {
     addSourceCode() {
       this.sourceCodes.push({ title: "", content: "" });
+      this.activeTab = this.sourceCodes.length - 1;
+    },
+    addClipboardSourceCode(title, content) {
+      console.log({ title, content });
+      this.sourceCodes.push({ title: title, content: content });
       this.activeTab = this.sourceCodes.length - 1;
     },
     removeSourceCode(index) {
